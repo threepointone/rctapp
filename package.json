@@ -1,0 +1,41 @@
+{
+  "name": "rctapp",
+  "version": "0.1.1",
+  "description": "React Native Cli Tools",
+  "main": "index.js",
+  "directories": {
+    "bin": "./lib"
+  },
+  "scripts": {
+    "prepublish": "./node_modules/.bin/babel ./src/ --out-dir ./lib/ --stage 0 --ignore '/node_modules/' --external-helpers --optional runtime",
+    "watch": "./node_modules/.bin/babel ./src/ --out-dir ./lib/ --stage 0 --ignore '/node_modules/' --external-helpers --optional runtime --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bh5-js/rctapp.git"
+  },
+  "keywords": [
+    "react",
+    "react",
+    "native",
+    "reactnative",
+    "ios",
+    "android",
+    "cli"
+  ],
+  "author": "Bodhi5 Inc <info@bodhi5.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bh5-js/rctapp/issues"
+  },
+  "homepage": "https://github.com/bh5-js/rctapp#readme",
+  "dependencies": {
+    "babel-runtime": "^5.5.4",
+    "commander": "^2.8.1"
+  },
+  "devDependencies": {
+    "react-native": "git://github.com/facebook/react-native.git",
+    "babel": "^5.5.4"
+  }
+}
