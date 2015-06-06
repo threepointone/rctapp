@@ -3,13 +3,14 @@
   "version": "0.1.1",
   "description": "React Native Cli Tools",
   "main": "index.js",
-  "directories": {
-    "bin": "./lib"
-  },
   "scripts": {
     "prepublish": "./node_modules/.bin/babel ./src/ --out-dir ./lib/ --stage 0 --ignore '/node_modules/' --external-helpers --optional runtime",
     "watch": "./node_modules/.bin/babel ./src/ --out-dir ./lib/ --stage 0 --ignore '/node_modules/' --external-helpers --optional runtime --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "rctapp": "./lib/rctapp.js",
+    "rctapp-dev": "./lib/rctapp-dev.js"
   },
   "repository": {
     "type": "git",
