@@ -1,6 +1,6 @@
 {
   "name": "rctapp",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "React Native Cli Tools",
   "main": "index.js",
   "scripts": {
@@ -32,11 +32,11 @@
   },
   "homepage": "https://github.com/bh5-js/rctapp#readme",
   "dependencies": {
-    "babel-runtime": "^5.5.4",
+    "babel": "^5.6.4",
+    "babel-runtime": "^5.6.4",
     "commander": "^2.8.1"
   },
   "devDependencies": {
-    "react-native": "git://github.com/facebook/react-native.git",
-    "babel": "^5.5.4"
+    "react-native": "git://github.com/facebook/react-native.git"
   }
 }

@@ -1,18 +1,21 @@
 'use strict';
 
-import { spawnSync, fork } from 'child_process';
-import { cwdPath, CWD } from './utils';
+import { reactPackager, babelTransform, cwdPath } from './utils';
+import program from 'commander';
 
-process.stdout.write(`Starting Babel watcher and React Native Packager`);
+program
+.option('-b, --babel', 'precompile js with babel')
+.option('-v, --verbose', 'verbose output')
+.action((cmd, options) => {
+  process.stdin.resume();
+  process.stdout.write(`Starting Babel watcher and React Native Packager`);
+  if (options.babel) {
+      babelTransform('src', cwdPath('lib/'), options.verbose, true);
+  }
+  reactPackager('start', (code, sig) => {
+    process.stdout(`Exited with code: ${code}\n${sig}\n`);
+  });
 
-fork(cwdPath('node_modules/react-native/packager/packager.js'), null, { cwd: CWD, exePath: CWD, silent: true });
-spawnSync('./node_modules/.bin/babel', [
-  cwdPath('src'),
-  `--out-dir=${cwdPath('lib/')}`,
-  '--stage=0',
-  '--ignore=/node_modules/',
-  '--optional=runtime',
-  '--watch',
-  ], { stdio: 'inherit' }
-);
+});
 
+program.parse(process.argv);

@@ -47,6 +47,12 @@ $ rctapp launch-sim
 $ rctapp clean
 ```
 
+## Notes
+
+Currently React and React Native do not whitelist all babeljs transforms.
+So as a temporary fix you can precompile your js with non whitelisted babel transforms 
+by adding the `-b` or `--babel` flag to any command (precompiles with babel on `--stage 0`)
+
 ## License
 
 MIT
