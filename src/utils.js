@@ -31,6 +31,7 @@ export function babelTransform(inDir, outDir, verbose, watch) {
     `--out-dir=${outDir}`,
     '--stage=0',
     '--ignore=/node_modules/',
+    '--loose=all',
     '--optional=runtime',
   ];
 
