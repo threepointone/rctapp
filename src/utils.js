@@ -1,5 +1,7 @@
 'use strict';
 
+import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import { spawn, fork } from 'child_process';
 
@@ -46,5 +48,19 @@ export function reactPackager(cmd, fn) {
   let cb = fn ? fn : () => {};
   let cp = fork(cwdPath('node_modules/react-native/local-cli/cli.js'), [`${cmd}`], { cwd: CWD, exePath: CWD });
   cp.on('close', (code, sig) => cb(code, sig));
+}
+
+export function resetCache() {
+  let tempDir = os.tmpdir();
+
+  let cacheFiles = fs.readdirSync(tempDir).filter(function (fileName) {
+    return fileName.indexOf('react-packager-cache') === 0;
+  });
+
+  cacheFiles.forEach(function (cacheFile) {
+    let cacheFilePath = path.join(tempDir, cacheFile);
+    fs.unlinkSync(cacheFilePath);
+    process.stdout.write(`Deleted cache file ${cacheFilePath}\n`);
+  });
 }
 

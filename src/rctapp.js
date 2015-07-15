@@ -10,6 +10,7 @@ import {
   babelTransform,
   cwdPath,
   IOS_DEVICE_LIST,
+  resetCache,
 } from './utils';
 
 const DEVICE_LIST = IOS_DEVICE_LIST;
@@ -88,11 +89,16 @@ program
 });
 
 program
-.command('clean')
-.description('clean build')
+.command('clean [type]')
+.description('clean build artifact type (cache, xcodeproj, etc...) defaults to xcodeproj')
 .option('-v, --verbose', 'verbose output')
-.action((options) => {
+.action((type, options) => {
   let output = options.verbose ? { stdio: 'inherit' } : {stdio: ['ignore', 'ignore', process.stderr] };
+
+  if (type === 'cache') {
+    resetCache();
+    return;
+  }
 
   spawnSync('xcodebuild', ['clean'], { stdio: 'inherit' });
   spawnSync('xcrun', ['instruments', '-w', `iPhone 5s`], output);
