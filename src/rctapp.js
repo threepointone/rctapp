@@ -56,7 +56,7 @@ program
 
   // Build Xcode Project
   let buildCMD = ['-scheme', `${appName}`, '-configuration', 'Debug', '-destination', `platform=${platform},name=${device}`, 'build', '-derivedDataPath', cwdPath('build')];
-  if (fs.statSync(cwdPath(`${appName}.xcworkspace`)).isDirectory()) {
+  if (fs.existsSync(cwdPath(`${appName}.xcworkspace`)) && fs.statSync(cwdPath(`${appName}.xcworkspace`)).isDirectory()) {
     buildCMD.push('-workspace', `${appName}.xcworkspace`);
   } else {
     buildCMD.push('-project', `${appName}.xcodeproj`);
